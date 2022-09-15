@@ -143,7 +143,7 @@ def get_info():
 # push할 HTML
 def push_html(df):
     html_text = '''<head>
-    <meta name="viewport" content="width=device-width" charset="UTF-8" http-equiv="refresh" content="60" />
+    <meta name="viewport" content="width=device-width" charset="UTF-8 " http-equiv="refresh" content="60" />
     <title>실시간 경쟁률</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -165,7 +165,7 @@ def push_html(df):
     html_final = html_text + html_body + '</body>'
 
     with open('index.html', 'w') as html_file:
-        html_file.write(html_final)
+        html_file.write(html_final, encoding="UTF-8")
 
     repo = Repo()
     repo.index.add('index.html')
