@@ -103,45 +103,39 @@ tabs = driver.window_handles
 # 크롤링
 def get_info():
     col = ['모집 인원', '지원자 수', '경쟁률', '기준 시각']
-    ind = ['울산대 지역인재', '부산대 지역인재', '경희대 네오르네상스', '한양대 일반', '고려대 학업우수', '아주대 ACE']
-    con = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+    ind = ['성균관대 공학계열', '한양대 일반', '한양대 소프트웨어인재', '부산대 지역인재', 'POSTECH 일반']
+    con = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
     df = pd.DataFrame(con, columns=col, index=ind)
 
-    # TAB_0: 울산대 지역인재
+    # TAB_0: 성균관대 공학계열
     driver.switch_to.window(tabs[0])
     driver.get('http://ratio.uwayapply.com/Sl5KVzgmQzpKZiUmOiZKcGZUZg==')
     ulsan = Department('//*[@id="Tr_02B02034_002080000"]/td', ['[3]', '[4]', '[5]/font/b'], '//*[@id="ID_DateStr"]/label')
-    df.loc['울산대 지역인재'] = list_generator(ulsan)
+    df.loc['성균관대 공학계열'] = list_generator(ulsan)
 
-    # TAB_1: 부산대 지역인재
+    # TAB_1: 한양대 일반
     driver.switch_to.window(tabs[1])
     driver.get('http://addon.jinhakapply.com/RatioV1/RatioH/Ratio12100301.html')
     pusan = Department('//*[@id="SelType4F"]/table/tbody/tr[29]/td', ['[3]', '[4]', '[5]'], '//*[@id="RatioTime"]')
-    df.loc['부산대 지역인재'] = list_generator(pusan)
+    df.loc['한양대 일반'] = list_generator(pusan)
 
-    # TAB_2: 경희대 네오르네상스
+    # TAB_2: 한양대 소프트웨어인재
     driver.switch_to.window(tabs[2])
     driver.get('http://ratio.uwayapply.com/Sl5KOnw5SmYlJjomSnBmVGY=')
     kyunghee = Department('//*[@id="Tr_01312_000700000"]/td', ['[3]', '[4]', '[5]/font/b'], '//*[@id="ID_DateStr"]/label')
-    df.loc['경희대 네오르네상스'] = list_generator(kyunghee)
+    df.loc['한양대 소프트웨어인재'] = list_generator(kyunghee)
 
-    # TAB_3: 한양대 일반
+    # TAB_3: 부산대 지역인재
     driver.switch_to.window(tabs[3])
     driver.get('http://addon.jinhakapply.com/RatioV1/RatioH/Ratio11640191.html')
     hanyang = Department('//*[@id="SelType4B"]/table/tbody/tr[23]/td', ['[3]', '[4]', '[5]'], '//*[@id="RatioTime"]')
-    df.loc['한양대 일반'] = list_generator(hanyang)
+    df.loc['부산대 지역인재'] = list_generator(hanyang)
 
-    # TAB_4: 고려대 학업우수
+    # TAB_4: POSTECH 일반
     driver.switch_to.window(tabs[4])
     driver.get('http://ratio.uwayapply.com/Sl5KOGB9YTlKZiUmOiZKcGZUZg==')
     korea = Department('//*[@id="Tr_0151_000950000"]/td', ['[3]', '[4]', '[5]/font/b'], '//*[@id="ID_DateStr"]/label')
-    df.loc['고려대 학업우수'] = list_generator(korea)
-
-    # TAB_5: 아주대 ACE
-    driver.switch_to.window(tabs[5])
-    driver.get('http://addon.jinhakapply.com/RatioV1/RatioH/Ratio11040291.html')
-    ajou = Department('//*[@id="SelType402"]/table/tbody/tr[21]/td', ['[2]', '[3]', '[4]'], '//*[@id="RatioTime"]')
-    df.loc['아주대 ACE'] = list_generator(ajou)
+    df.loc['POSTECH 일반'] = list_generator(korea)
 
     return df
 
